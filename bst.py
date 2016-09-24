@@ -22,12 +22,12 @@ class Node:
             if self.left == None:
                 self.left = Node(key_to_insert)
             else:
-                insert(self.left, key_to_insert)
+                self.left.insert(key_to_insert)
         elif key_to_insert > self.key:
             if self.right == None:
                 self.right = Node(key_to_insert)
             else:
-                insert(self.right, key_to_insert)
+                self.right.insert(key_to_insert)
         # NOTE: If key_to_insert equals my_key,
         #       then the node need should NOT be inserted in the tree.
         # REMOVE the assert below
@@ -45,8 +45,8 @@ class Node:
     def get_depth(self):
         if self == None:
             return 0
-        rightDepth = get_depth(self.right)
-        leftDepth = get_depth(self.left)
+        rightDepth = self.right.get_depth
+        leftDepth = self.left.get_depth
         if leftDepth < rightDepth:
             return rightDepth + 1
         else:
@@ -58,15 +58,17 @@ class Node:
 
     def key_exists(self, key_to_find):
         if self.key == key_to_find:
-            return true
+            return True
         elif self.key > key_to_find:
             if self.left == None:
                 return False
-            else key_exists(self.left, key_to_find)
+            else:
+                self.left.key_exists(key_to_find)
         else:
             if self.right == None:
                 return False
-            else key_exists(self.right, key_to_find)
+            else:
+                self.right.key_exists(key_to_find)
         # return True if the key_to_find is already in the tree,
         #   otherwise return False
         # REMOVE the assert below
