@@ -18,29 +18,59 @@ class Node:
         self.right = None       # Set right child to None
 
     def insert(self, key_to_insert):
-        # TODO: write an insert function for the BST.
+        if key_to_insert < self.key:
+            if self.left == None:
+                self.left = Node(key_to_insert)
+            else:
+                insert(self.left, key_to_insert)
+        elif key_to_insert > self.key:
+            if self.right == None:
+                self.right = Node(key_to_insert)
+            else:
+                insert(self.right, key_to_insert)
         # NOTE: If key_to_insert equals my_key,
         #       then the node need should NOT be inserted in the tree.
         # REMOVE the assert below
-        assert False, 'Function insert not implemented yet.'
+        #assert False, 'Function insert not implemented yet.'
 
     def inorder_traversal(self, ret_list):
-        # TODO: write an inorder traversal function for the BST.
+        if self.left != None:
+            inorder_traversal(self.left, ret_list)
+        ret_list.extend(self.key)
+        if self.right != None:
+            inorder_traversal(self.right, ret_list)
         # REMOVE the assert below
-        assert False, 'Function inorder_traversal not implemented yet'
+        #assert False, 'Function inorder_traversal not implemented yet'
 
     def get_depth(self):
-        # TODO: write a get_depth function for the BST
+        if self == None:
+            return 0
+        rightDepth = get_depth(self.right)
+        leftDepth = get_depth(self.left)
+        if leftDepth < rightDepth:
+            return rightDepth + 1
+        else:
+            return leftDepth + 1
         #   Depth of a tree with no children is 1.
         #   Otherwise, depth = 1 + max(depth(left subtree), depth(right subtree))
         # REMOVE the assert below
-        assert False, 'Function get_depth not implemented yet'
+        #assert False, 'Function get_depth not implemented yet'
 
     def key_exists(self, key_to_find):
+        if self.key == key_to_find:
+            return true
+        elif self.key > key_to_find:
+            if self.left == None:
+                return False
+            else key_exists(self.left, key_to_find)
+        else:
+            if self.right == None:
+                return False
+            else key_exists(self.right, key_to_find)
         # return True if the key_to_find is already in the tree,
         #   otherwise return False
         # REMOVE the assert below
-        assert False, ' Function find not implemented yet'
+        #assert False, ' Function find not implemented yet'
 
 if __name__ == '__main__':
     print('Please do not call this file directly.')
