@@ -1,3 +1,7 @@
+# Name: Thomas Trieu
+# On my honor as a University of Colorado student, this code was entirely
+# written by myself with no unauthorized help.
+#
 # This class implements a Binary Search Tree Class
 # The binary search tree class will include functionality of
 #   1. Insert a Node in the Tree.
@@ -35,22 +39,23 @@ class Node:
 
     def inorder_traversal(self, ret_list):
         if self.left != None:
-            inorder_traversal(self.left, ret_list)
-        ret_list.extend(self.key)
+            self.left.inorder_traversal(ret_list)
+        ret_list.append(self.key)
         if self.right != None:
-            inorder_traversal(self.right, ret_list)
+            self.right.inorder_traversal(ret_list)
         # REMOVE the assert below
         #assert False, 'Function inorder_traversal not implemented yet'
 
     def get_depth(self):
-        if self == None:
-            return 0
-        rightDepth = self.right.get_depth
-        leftDepth = self.left.get_depth
-        if leftDepth < rightDepth:
-            return rightDepth + 1
+        if self.right:
+            rightDepth = self.right.get_depth()
         else:
-            return leftDepth + 1
+            rightDepth = 0
+        if self.left:
+            leftDepth = self.left.get_depth()
+        else:
+            leftDepth = 0
+        return max(rightDepth, leftDepth) + 1
         #   Depth of a tree with no children is 1.
         #   Otherwise, depth = 1 + max(depth(left subtree), depth(right subtree))
         # REMOVE the assert below
@@ -63,12 +68,12 @@ class Node:
             if self.left == None:
                 return False
             else:
-                self.left.key_exists(key_to_find)
+                return self.left.key_exists(key_to_find)
         else:
             if self.right == None:
                 return False
             else:
-                self.right.key_exists(key_to_find)
+                return self.right.key_exists(key_to_find)
         # return True if the key_to_find is already in the tree,
         #   otherwise return False
         # REMOVE the assert below
